@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Ski Kit Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="page-wrapper">
+        <header>
+            <h1>Ski Kit Builder</h1>
+            <p>Customize your professional equipment</p>
+        </header>
+
+        <main class="content">
+            <div class="character-viewport">
+                <div class="ski-man">
+                    <div class="face"></div>
+                    
+                    <button class="gear helmet" onclick="selectGear('Elite Helmet', 'Carbon-fiber shell with integrated MIPS safety tech.', 'page2.html', this)">
+                        <span>HELMET</span>
+                    </button>
+
+                    <button class="gear goggles" onclick="selectGear('Pro Goggles', 'Anti-fog spherical lens, 100% UV400.', 'page3.html', this)">
+                        <span>GOGGLES</span>
+                    </button>
+
+                    <button class="gear jacket" onclick="selectGear('Thermal Jacket', '3-layer Gore-Tex Pro waterproof shell.', 'page4.html', this)">
+    <span>JACKET</span>
+</button>
+
+<button class="gear pants" onclick="selectGear('Summit Pants', 'Insulated waterproof pants with vents.', 'page4.html', this)">
+    <span>PANTS</span>
+</button>
+                    
+                    <div class="boots-group">
+                        <button class="gear boot-left" onclick="selectGear('Alpine Boots', '120 Flex boots with custom liners.', '', this)">BOOT</button>
+                        <button class="gear boot-right" onclick="selectGear('Alpine Boots', '120 Flex boots with custom liners.', '', this)">BOOT</button>
+                    </div>
+
+                    <div class="skis-container">
+                        <div class="ski-board s-left"></div>
+                        <div class="ski-board s-right"></div>
+                    </div>
+
+                    <div class="poles">
+                        <div class="pole p-left"></div>
+                        <div class="pole p-right"></div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="details-panel">
+                <div id="empty-state">
+                    <h3>Gear Details</h3>
+                    <p>Select equipment on the model to view specs.</p>
+                </div>
+                <div id="selection-content" style="display: none;">
+                    <h2 id="item-name">Item Name</h2>
+                    <div class="badge">Professional Grade</div>
+                    <p id="item-desc">Description text.</p>
+                    
+                    <a href="#" id="view-details-btn" class="cta-button">View Details</a>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script>
+        // We added 'linkUrl' as a parameter to this function
+        function selectGear(name, desc, linkUrl, element) {
+            // 1. Update text
+            document.getElementById('item-name').innerText = name;
+            document.getElementById('item-desc').innerText = desc;
+            
+            // 2. Show the info panel
+            document.getElementById('empty-state').style.display = 'none';
+            document.getElementById('selection-content').style.display = 'block';
+
+            // 3. Update the blue button's link dynamically!
+            const detailsBtn = document.getElementById('view-details-btn');
+            if (linkUrl !== '') {
+                // If a page exists (like page2.html or page3.html), update the link and show the button
+                detailsBtn.href = linkUrl;
+                detailsBtn.style.display = 'block';
+            } else {
+                // If there is no page yet (like for the Jacket), hide the blue button
+                detailsBtn.style.display = 'none';
+            }
+
+            // 4. Highlight the selected gear
+            document.querySelectorAll('.gear').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
