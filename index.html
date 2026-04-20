@@ -1,99 +1,468 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro Ski Kit Builder</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snow Gear Guide</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <div class="page-wrapper">
-        <header>
-            <h1>Ski Kit Builder</h1>
-            <p>Customize your professional equipment</p>
-        </header>
+  <!-- BUILDER -->
+  <section id="hub-view" class="view-section active">
+    <div class="container">
+      <div class="top-nav">
+        <div class="top-nav-inner">
+          <button class="nav-pill" onclick="switchView('hub-view')">Builder</button>
+          <button class="nav-pill" onclick="switchView('clothing-view')">Clothing</button>
+          <button class="nav-pill" onclick="switchView('pants-view')">Snow Pants</button>
+          <button class="nav-pill" onclick="switchView('goggles-view')">Ski Goggles</button>
+          <button class="nav-pill" onclick="switchView('boots-view')">Boots</button>
+          <button class="nav-pill" onclick="switchView('ski-view')">Skis</button>
+          <button class="nav-pill" onclick="switchView('timeline-view')">Helmet</button>
+        </div>
+      </div>
 
-        <main class="content">
-            <div class="character-viewport">
-                <div class="ski-man">
-                    <div class="face"></div>
-                    
-                    <button class="gear helmet" onclick="selectGear('Elite Helmet', 'Carbon-fiber shell with integrated MIPS safety tech.', 'page2.html', this)">
-                        <span>HELMET</span>
-                    </button>
+      <div class="page-header">
+        <h1>Snow Gear Guide</h1>
+        <p>Built for intermediate skiers · matching real product photos</p>
+      </div>
 
-                    <button class="gear goggles" onclick="selectGear('Pro Goggles', 'Anti-fog spherical lens, 100% UV400.', 'page3.html', this)">
-                        <span>GOGGLES</span>
-                    </button>
+      <div class="hub-content">
+        <div class="character-viewport">
+          <button class="gear helmet" onclick="selectGear('Helmet Protection Guide', 'Compare basic helmets, advanced helmets, and MIPS protection levels.', 'timeline-view', this)">Helmet</button>
+          <div class="face"></div>
+          <button class="gear goggles" onclick="selectGear('Ski Goggles Guide', 'Scroll through entry-level, mid-tier, and high-end goggles like a visual story.', 'goggles-view', this)">Goggles</button>
+          <button class="gear jacket" onclick="selectGear('Clothing Budget Guide', 'Compare entry-level, mid-tier, and high-end clothing options.', 'clothing-view', this)">Jacket</button>
+          <button class="gear pants" onclick="selectGear('Snow Pants Guide', 'Browse affordable, premium, and luxury snow pants.', 'pants-view', this)">Pants</button>
+          <button class="gear ski-left" onclick="selectGear('Ski Boot Guide', 'Find ski boots from easy-flex beginner models to stiffer expert boots.', 'boots-view', this)">Boots</button>
+          <button class="gear ski-right" onclick="selectGear('Ski Guide', 'Explore beginner and all-mountain ski options with real product images.', 'ski-view', this)">Skis</button>
+        </div>
 
-                    <button class="gear jacket" onclick="selectGear('Thermal Jacket', '3-layer Gore-Tex Pro waterproof shell.', 'page4.html', this)">
-    <span>JACKET</span>
-</button>
+        <div class="details-panel">
+          <div id="empty-state">
+            <h3>Gear Details</h3>
+            <p>Select equipment on the model to view a guide.</p>
+          </div>
 
-<button class="gear pants" onclick="selectGear('Summit Pants', 'Insulated waterproof pants with vents.', 'page4.html', this)">
-    <span>PANTS</span>
-</button>
-                    
-                    <div class="boots-group">
-                        <button class="gear boot-left" onclick="selectGear('Alpine Boots', '120 Flex boots with custom liners.', '', this)">BOOT</button>
-                        <button class="gear boot-right" onclick="selectGear('Alpine Boots', '120 Flex boots with custom liners.', '', this)">BOOT</button>
-                    </div>
+          <div id="selection-content" style="display:none;">
+            <h2 id="item-name">Item Name</h2>
+            <div class="badge">Guide Ready</div>
+            <p id="item-desc"></p>
+            <button id="view-details-btn" class="cta-button" onclick="switchView(this.dataset.target)">View Detailed Guide</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                    <div class="skis-container">
-                        <div class="ski-board s-left"></div>
-                        <div class="ski-board s-right"></div>
-                    </div>
-
-                    <div class="poles">
-                        <div class="pole p-left"></div>
-                        <div class="pole p-right"></div>
-                    </div>
-                </div>
-            </div>
-
-            <aside class="details-panel">
-                <div id="empty-state">
-                    <h3>Gear Details</h3>
-                    <p>Select equipment on the model to view specs.</p>
-                </div>
-                <div id="selection-content" style="display: none;">
-                    <h2 id="item-name">Item Name</h2>
-                    <div class="badge">Professional Grade</div>
-                    <p id="item-desc">Description text.</p>
-                    
-                    <a href="#" id="view-details-btn" class="cta-button">View Details</a>
-                </div>
-            </aside>
-        </main>
+  <!-- GOGGLES PAGE -->
+  <section id="goggles-view" class="view-section">
+    <div class="container" style="padding-top:10px;">
+      <span class="back-link" onclick="switchView('hub-view')">← Back to Builder</span>
     </div>
 
-    <script>
-        // We added 'linkUrl' as a parameter to this function
-        function selectGear(name, desc, linkUrl, element) {
-            // 1. Update text
-            document.getElementById('item-name').innerText = name;
-            document.getElementById('item-desc').innerText = desc;
-            
-            // 2. Show the info panel
-            document.getElementById('empty-state').style.display = 'none';
-            document.getElementById('selection-content').style.display = 'block';
+    <div class="goggles-hero">
+      <div class="container">
+        <div class="page-header" style="margin-bottom:0;">
+          <h1>Ski Goggles Guide</h1>
+          <p>Scroll to explore each price tier</p>
+        </div>
+      </div>
+    </div>
 
-            // 3. Update the blue button's link dynamically!
-            const detailsBtn = document.getElementById('view-details-btn');
-            if (linkUrl !== '') {
-                // If a page exists (like page2.html or page3.html), update the link and show the button
-                detailsBtn.href = linkUrl;
-                detailsBtn.style.display = 'block';
-            } else {
-                // If there is no page yet (like for the Jacket), hide the blue button
-                detailsBtn.style.display = 'none';
-            }
+    <div class="container">
+      <div class="goggle-story">
+        <div class="goggle-image">
+          <div class="goggle-photo-wrap">
+            <img src="https://assets2.oakley.com/cdn-record-files-pi/62faba78-4475-406d-b39d-acda01891967/d3dc89b9-a5e7-481a-a292-acdb00fe8b73/0OO7125__712501_000A.png?impolicy=OO_ratio&width=768" alt="Oakley O-Frame 2.0 Pro ski goggles">
+            <div class="goggle-number">01</div>
+          </div>
+        </div>
+        <div class="goggle-copy">
+          <span class="level-pill level-mid">$50 – $100</span>
+          <h2>Entry-Level</h2>
+          <p>Perfect for learners and casual skiers. Solid UV protection, anti-fog coating, and a comfortable fit without breaking the bank.</p>
+          <div class="goggle-brands">Top pick: Oakley O-Frame 2.0 PRO M</div>
+          <div class="progress-bars">
+            <span class="active"></span><span></span><span></span>
+          </div>
+          <div class="goggle-links">
+            <a class="goggle-link" href="https://www.oakley.com/en-us/category/goggles/snow" target="_blank" rel="noopener">Shop Oakley O-Frame</a>
+          </div>
+        </div>
+      </div>
 
-            // 4. Highlight the selected gear
-            document.querySelectorAll('.gear').forEach(el => el.classList.remove('active'));
-            element.classList.add('active');
-        }
-    </script>
+      <div class="goggle-story reverse">
+        <div class="goggle-image">
+          <div class="goggle-photo-wrap">
+            <img src="https://www.smithoptics.com/cdn/shop/files/squad-goggles_cactusZine-cpSunBlackGoldMirror_3Q.png?v=1764699131&width=1946" alt="Smith Squad ski goggles">
+            <div class="goggle-number">02</div>
+          </div>
+        </div>
+        <div class="goggle-copy">
+          <span class="level-pill level-mid">$100 – $200</span>
+          <h2>Mid-Tier</h2>
+          <p><strong>Best for intermediate skiers.</strong> Better optics, strong anti-fog performance, and excellent helmet integration.</p>
+          <div class="goggle-brands">Top pick: Smith Squad</div>
+          <div class="progress-bars">
+            <span></span><span class="active"></span><span></span>
+          </div>
+          <div class="goggle-links">
+            <a class="goggle-link" href="https://www.smithoptics.com/en-us/products/squad" target="_blank" rel="noopener">Shop Smith Squad</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="goggle-story">
+        <div class="goggle-image">
+          <div class="goggle-photo-wrap">
+            <img src="https://assets2.oakley.com/cdn-record-files-pi/15d1a3ab-20ae-4902-93c2-a4b5008979d2/f4b1fdb1-bfa6-4eb3-b8dd-ac6200dcd45f/0OO7064__706421__OOE__shad__000A.png?impolicy=OO_ratio&width=768" alt="Oakley Flight Deck M ski goggles">
+            <div class="goggle-number">03</div>
+          </div>
+        </div>
+        <div class="goggle-copy">
+          <span class="level-pill level-lux">$200+</span>
+          <h2>High-End</h2>
+          <p>Premium field of view, better lens tech, and advanced lens-changing systems for riders who ski often.</p>
+          <div class="goggle-brands">Top pick: Oakley Flight Deck M</div>
+          <div class="progress-bars">
+            <span></span><span></span><span class="active"></span>
+          </div>
+          <div class="goggle-links">
+            <a class="goggle-link" href="https://www.oakley.com/en-us/product/W0OO7064S" target="_blank" rel="noopener">Shop Flight Deck</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKI PAGE -->
+  <section id="ski-view" class="view-section">
+    <div class="container">
+      <span class="back-link" onclick="switchView('hub-view')">← Back to Builder</span>
+      <div class="page-header">
+        <h1>Ski Guide</h1>
+        <p>Essential ski types for different terrain and riding styles</p>
+      </div>
+
+      <div class="guide-grid-3">
+        <div class="product-card">
+          <img src="https://www.rossignol.com/on/demandware.static/-/Sites-rossignol-catalog/default/dw0f3e9f73/images/large/RAMFT04_FCMDX02_EXPERIENCE_76_XPRESS_XPRESS_10_GW_B83_BLACK_72DPI_01.jpg" alt="Rossignol Experience 76 Xpress skis">
+          <div class="product-body">
+            <span class="level-pill level-easy">Beginner</span>
+            <h3>Rossignol Experience 76 Xpress</h3>
+            <div class="product-sub">Easy turning · forgiving flex</div>
+            <ul class="feature-list">
+              <li>Friendly for newer skiers</li>
+              <li>Balanced shape for groomed runs</li>
+              <li>Smooth and stable at moderate speed</li>
+            </ul>
+            <a class="shop-btn" href="https://www.rossignol.com/us-en/sports/alpine-ski/skis" target="_blank" rel="noopener">Shop Rossignol Skis</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <img src="https://cdn.dam.salomon.com/0d76a9f5-b658-41e8-8c83-b31b00bd2aa5/L47827000%2B/PNG-2000px-max-72dpi.png?auto=avif&bg-color=transparent&fit=cover&format=pjpg&optimize=low&width=3840" alt="Salomon Stance Pro 90 skis">
+          <div class="product-body">
+            <span class="level-pill level-mid">All-Mountain</span>
+            <h3>Salomon Stance Pro 90</h3>
+            <div class="product-sub">Versatile · balanced · mixed terrain</div>
+            <ul class="feature-list">
+              <li>Great for everyday all-mountain use</li>
+              <li>Good edge hold on groomers</li>
+              <li>Stronger performance for progressing skiers</li>
+            </ul>
+            <a class="shop-btn" href="https://www.salomon.com/en-us/c/sports/alpine-skiing/skis/all-mountain" target="_blank" rel="noopener">Shop Salomon Skis</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <img src="https://images.evo.com/imgp/700/254128/1173856/atomic-maverick-86-c-skis-2025-.jpg" alt="Atomic Maverick 86 C skis">
+          <div class="product-body">
+            <span class="level-pill level-adv">Atomic · All-Mountain</span>
+            <h3>Atomic Maverick 86 C</h3>
+            <div class="product-sub">Balanced feel · intuitive control · versatile terrain</div>
+            <ul class="feature-list">
+              <li>Good for progressing skiers</li>
+              <li>Works well on groomers and mixed snow</li>
+              <li>More versatile than a pure beginner ski</li>
+            </ul>
+            <a class="shop-btn" href="https://www.atomic.com/en-us/shop/men/men-alpine-skiing/ski.html" target="_blank" rel="noopener">Shop Atomic Skis</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOTS PAGE -->
+  <section id="boots-view" class="view-section">
+    <div class="container">
+      <span class="back-link" onclick="switchView('hub-view')">← Back to Builder</span>
+      <div class="page-header">
+        <h1>Ski Boot Guide</h1>
+        <p>From beginner-friendly comfort to stronger all-mountain performance</p>
+      </div>
+
+      <div class="dot-legend">
+        <span class="dot-green">Easy to Wear</span>
+        <span class="dot-blue">Moderate</span>
+        <span class="dot-orange">Advanced</span>
+        <span class="dot-red">Hard to Wear</span>
+      </div>
+
+      <div class="guide-grid-4">
+        <div class="product-card">
+          <img src="https://www.rossignol.com/dw/image/v2/BJJZ_PRD/on/demandware.static/-/Sites-rossignol-catalog/default/dwa30e6937/images/large/RBO8150_000_72DPI_01.jpg?sh=1200&sw=1200" alt="Rossignol Evo 70 ski boots">
+          <div class="product-body">
+            <span class="level-pill level-easy">Easy · 70 Flex</span>
+            <h3>Rossignol Evo 70</h3>
+            <div class="product-sub">Wide 104mm last</div>
+            <p class="product-sub" style="color:#475569;">Comfort-focused beginner boot with a forgiving flex and easier fit.</p>
+            <div class="price">~$220</div>
+            <a class="shop-btn" href="https://www.rossignol.com/us-en/sports/alpine-ski/ski-boots" target="_blank" rel="noopener">Shop Rossignol Boots</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <img src="https://cdn.dam.salomon.com/3d9fe2a2-7416-4ad2-9a87-b31b00be6d79/L47934000/PNG-2000px-max-72dpi.png?auto=avif&bg-color=transparent&fit=cover&format=pjpg&optimize=low&pad=0.12%2C0.12%2C0.12%2C0.12&width=2918" alt="Salomon SHIFT SUPRA S BOA 130 ski boot">
+          <div class="product-body">
+            <span class="level-pill level-adv">Advanced BOA Fit</span>
+            <h3>Salomon SHIFT SUPRA S BOA 130</h3>
+            <div class="product-sub">Precise fit system</div>
+            <p class="product-sub" style="color:#475569;">A stronger performance boot with BOA closure and more precise hold.</p>
+            <div class="price">High-performance option</div>
+            <a class="shop-btn" href="https://www.salomon.com/en-us/c/men/winter-equipment/skiing/boots" target="_blank" rel="noopener">Shop Salomon Boots</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <img src="https://www.nordica.com/storage/Product/050T1000N96_SPORTMACHINE_3_100__GW__WEB_IMAGE_1.png" alt="Nordica Sportmachine 3 100 ski boot">
+          <div class="product-body">
+            <span class="level-pill level-mid">Moderate · 100 Flex</span>
+            <h3>Nordica Sportmachine 3 100</h3>
+            <div class="product-sub">102mm last, medium flex</div>
+            <p class="product-sub" style="color:#475569;"><strong>Strong intermediate pick.</strong> Wider fit with balanced comfort and control.</p>
+            <div class="price">~$550</div>
+            <a class="shop-btn" href="https://www.nordica.com/canada/en/collection/men/boots/sportmachine/sportmachine-3-100-gw-2" target="_blank" rel="noopener">Shop Nordica Boot</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <img src="https://img.thelasthunt.com/https%3A%2F%2Fs3.amazonaws.com%2Fsyncpigeon%2Falti_prod%2Fimages%2Fatm-ae5024640_dark-blue-red.jpg?q=75&w=3840" alt="Atomic Hawx Ultra 110 S GW ski boot">
+          <div class="product-body">
+            <span class="level-pill level-mid">Moderate · 110 Flex</span>
+            <h3>Atomic Hawx Ultra 110 S GW</h3>
+            <div class="product-sub">Narrow-fit all-mountain boot</div>
+            <p class="product-sub" style="color:#475569;">A stronger all-mountain option for confident skiers who want more precision.</p>
+            <div class="price">Performance fit</div>
+            <a class="shop-btn" href="https://www.atomic.com/en-us/shop/men/men-alpine-skiing/ski-boots.html" target="_blank" rel="noopener">Shop Atomic Boots</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOTHING PAGE -->
+  <section id="clothing-view" class="view-section">
+    <div class="container">
+      <span class="back-link" onclick="switchView('hub-view')">← Back to Builder</span>
+      <div class="page-header">
+        <h1>Clothing Budget Guide</h1>
+        <p>Find the right gear for your price range</p>
+      </div>
+
+      <div class="clothing-layout">
+        <div class="budget-row">
+          <div class="budget-image">
+            <img src="https://media.columbia.com/i/columbia/2134761_433_ht1_om?fmt=auto&w=1280" alt="Columbia Glacier Ridge Down Jacket">
+          </div>
+          <div class="budget-copy">
+            <span class="level-pill level-easy">Budget-Friendly</span>
+            <h3>Entry-Level</h3>
+            <div class="price">$85 – $150 for a full set</div>
+            <ul class="feature-list">
+              <li>Basic waterproof outer layer</li>
+              <li>Simple insulation</li>
+              <li>Great affordable starter option</li>
+            </ul>
+            <a class="shop-btn" href="https://www.columbia.com/c/mens-snow-ski-jackets/" target="_blank" rel="noopener" style="display:inline-block; width:auto; padding:10px 20px;">Shop at Columbia</a>
+          </div>
+        </div>
+
+        <div class="budget-row reverse">
+          <div class="budget-image">
+            <img src="https://assets.thenorthface.com/images/t_img/f_auto%2Ch_400%2Ce_unsharp_mask%3A100%2Cw_344/dpr_2.0/v1754337593/NF0A87Y68K2-HERO/Mens-Chakal-Jacket-TNF-HERO.png" alt="The North Face Chakal Jacket">
+          </div>
+          <div class="budget-copy">
+            <span class="level-pill level-mid">Mid-Range · Best for Intermediates</span>
+            <h3>Mid-Tier</h3>
+            <div class="price">$300 – $500 for a full set</div>
+            <ul class="feature-list">
+              <li>Better waterproofing</li>
+              <li>More breathability</li>
+              <li>More durable fabrics</li>
+            </ul>
+            <a class="shop-btn" href="https://www.thenorthface.com/en-us/c/mens/mens-jackets-and-vests/mens-ski-and-snowboarding-jackets-299293" target="_blank" rel="noopener" style="display:inline-block; width:auto; padding:10px 20px;">Shop at The North Face</a>
+          </div>
+        </div>
+
+        <div class="budget-row">
+          <div class="budget-image">
+            <img src="https://a.storyblok.com/f/274961/98f0041620/340201901_model_ellisbrigham_01.jpg/m/800x1060/filters:format(jpeg):quality(80)" alt="Arc'teryx Sabre jacket">
+          </div>
+          <div class="budget-copy">
+            <span class="level-pill level-lux">Premium</span>
+            <h3>High-End</h3>
+            <div class="price">$900+ for a full set</div>
+            <ul class="feature-list">
+              <li>Premium technical fabrics</li>
+              <li>Better mobility and articulation</li>
+              <li>Made for frequent mountain use</li>
+            </ul>
+            <a class="shop-btn" href="https://arcteryx.com/us/en/c/mens/ski-jackets" target="_blank" rel="noopener" style="display:inline-block; width:auto; padding:10px 20px;">Shop at Arc'teryx</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-note">💡 You should feel slightly cold before you start skiing — you’ll warm up fast.</div>
+    </div>
+  </section>
+
+  <!-- PANTS PAGE -->
+  <section id="pants-view" class="view-section">
+    <div class="container">
+      <span class="back-link" onclick="switchView('hub-view')">← Back to Builder</span>
+      <div class="page-header">
+        <h1>Snow Pants Guide</h1>
+        <p>From affordable to luxury options</p>
+      </div>
+
+      <div class="section-title" style="margin-top:20px;">Snow Pants</div>
+      <div class="guide-grid-3">
+        <div class="product-card">
+          <img src="https://img.thelasthunt.com/https%3A%2F%2Fs3.amazonaws.com%2Fsyncpigeon%2Falti_prod%2Fimages%2Fcol-1864311_black.jpg?q=75&w=3840" alt="Columbia Bugaboo IV Pant">
+          <div class="product-body">
+            <span class="level-pill level-easy">Affordable</span>
+            <h3>Columbia</h3>
+            <div class="product-sub">Bugaboo IV Pant</div>
+            <div class="price">~$100 – $160</div>
+            <ul class="feature-list">
+              <li>Waterproof Omni-Tech</li>
+              <li>Omni-Heat lining</li>
+              <li>Snow gaiters and mountain-ready fit</li>
+            </ul>
+            <a class="shop-btn" href="https://www.columbia.com/p/mens-bugaboo-iv-insulated-ski-pants-1864311.html" target="_blank" rel="noopener">Shop Columbia Pants</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <img src="https://img.thelasthunt.com/https%3A%2F%2Fs3.amazonaws.com%2Fsyncpigeon%2Falti_prod%2Fimages%2Farc-24003_robotica.jpg?q=75&w=3840" alt="Arc'teryx Sabre AR Pant">
+          <div class="product-body">
+            <span class="level-pill level-mid">Premium · Intermediate Pick</span>
+            <h3>Arc'teryx</h3>
+            <div class="product-sub">Sabre AR Pant</div>
+            <div class="price">Premium shell option</div>
+            <ul class="feature-list">
+              <li>Weather protection for mountain days</li>
+              <li>Articulated design</li>
+              <li>Built for frequent skiing</li>
+            </ul>
+            <a class="shop-btn" href="https://arcteryx.com/us/en/c/mens/ski-pants" target="_blank" rel="noopener">Shop Arc'teryx Pants</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <img src="https://www.bogner.com/dw/image/v2/BFLD_PRD/on/demandware.static/-/Sites-bogner-master/default/dwa5c84f60/images/1/3/2/4/2/2/1/5/254-1447-8374-026_s01_life_frontbottom_01_b2c_1761760806.jpg?sfrm=jpg&sh=720&sm=cut&sw=480" alt="FIRE+ICE Nic ski pants">
+          <div class="product-body">
+            <span class="level-pill level-lux">Luxury</span>
+            <h3>Bogner</h3>
+            <div class="product-sub">FIRE+ICE Nic Ski Pants</div>
+            <div class="price">Luxury tier</div>
+            <ul class="feature-list">
+              <li>Waterproof construction</li>
+              <li>Light padding and snow guard</li>
+              <li>Premium designer finish</li>
+            </ul>
+            <a class="shop-btn" href="https://www.bogner.com/en-us/c/men/clothing/bottoms/ski-pants/453668/" target="_blank" rel="noopener">Shop Bogner Pants</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HELMET PAGE -->
+  <section id="timeline-view" class="view-section">
+    <div class="container">
+      <span class="back-link" onclick="switchView('hub-view')">← Back to Builder</span>
+      <div class="page-header">
+        <h1>Ski Helmet Protection Levels</h1>
+        <p>Your journey from low protection to safer options</p>
+      </div>
+
+      <div class="timeline-wrapper">
+        <div class="mobile-line"></div>
+
+        <svg class="desktop-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path d="M 45 10 C 20 25, 10 40, 30 50 C 50 60, 90 40, 75 60 C 60 80, 10 70, 25 85 C 35 95, 40 95, 45 100"
+                fill="none" stroke="#cbd5e1" stroke-width="0.5" opacity="0.5"/>
+        </svg>
+
+        <div class="node n-1">
+          <div class="dot" style="background:var(--red);">🚫</div>
+          <div class="info-card" style="border-color:var(--red);">
+            <h3>No Helmet</h3>
+            <p>Very unsafe. No impact protection and much higher risk of serious head injury.</p>
+          </div>
+        </div>
+
+        <div class="node n-2">
+          <div class="dot" style="background:var(--orange);">⚠️</div>
+          <div class="info-card" style="border-color:var(--orange);">
+            <h3>Basic Helmet</h3>
+            <p>Minimal protection with a simple shell and foam. Better than nothing, but still basic.</p>
+            <small>Wildhorn Drift · OutdoorMaster Pro</small>
+            <a class="buy-link" href="https://www.outdoormaster.com/collections/ski-helmets" target="_blank" rel="noopener">Shop at OutdoorMaster</a>
+          </div>
+        </div>
+
+        <div class="node n-3">
+          <div class="dot" style="background:#eab308;">🪖</div>
+          <div class="info-card" style="border-color:#eab308;">
+            <h3>Standard Helmet</h3>
+            <p>Good everyday protection. ASTM-certified construction and strong mountain basics.</p>
+            <small>Smith Maze · Giro Ledge · Anon Raider</small>
+            <a class="buy-link" href="https://www.giro.com/snow/helmets/" target="_blank" rel="noopener">Shop Giro Helmets</a>
+          </div>
+        </div>
+
+        <div class="node n-4">
+          <div class="dot" style="background:var(--green);">⛑️</div>
+          <div class="info-card" style="border-color:var(--green);">
+            <h3>Advanced Helmet</h3>
+            <p>Improved fit, ventilation, and better comfort for skiers who ride often.</p>
+            <small>Smith Descend MIPS · POC Obex</small>
+            <a class="buy-link" href="https://www.smithoptics.com/en-us/collections/snow-helmets" target="_blank" rel="noopener">Shop Smith Helmets</a>
+          </div>
+        </div>
+
+        <div class="node n-5">
+          <div class="dot" style="background:#10b981;">✓</div>
+          <div class="info-card" style="border-color:#10b981;">
+            <h3>MIPS Helmet · Intermediate Pick</h3>
+            <p>Best protection in this guide. Designed to help reduce rotational forces during angled impacts.</p>
+            <small>Smith Vantage MIPS · POC Fornix MIPS</small>
+            <a class="buy-link" href="https://www.smithoptics.com/en-us/products/vantage-mips-r" target="_blank" rel="noopener">Shop Smith Vantage MIPS</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        <p>Always wear a helmet when skiing. Look for ASTM F2040 certification.</p>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 </html>
